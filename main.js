@@ -1,15 +1,12 @@
-// Confirm the file is running
-console.log("main.js is connected!");
+// Make sure this is your first line
+console.log("✅ main.js connected");
 
-// Import Three.js and addons from CDN
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js';
+// ✅ Use full CDN paths, NOT "three"
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
+import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js";
 
-// === Scene Setup ===
+// === Scene setup ===
 const scene = new THREE.Scene();
-
-// Camera
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -18,42 +15,36 @@ const camera = new THREE.PerspectiveCamera(
 );
 camera.position.z = 5;
 
-// Renderer
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setClearColor(0x944545);
 document.body.appendChild(renderer.domElement);
 
-// Lighting
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(1, 1, 1);
-scene.add(light);
-
-// Simple cube
+// === Cube ===
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 
-// Controls
+// === Light ===
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(1, 1, 1);
+scene.add(light);
+
+// === Controls ===
 const controls = new OrbitControls(camera, renderer.domElement);
 
-// === Animation Loop ===
+// === Animate ===
 function animate() {
   requestAnimationFrame(animate);
-
-  // Rotate cube
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
-
   controls.update();
   renderer.render(scene, camera);
 }
-
 animate();
 
-// === Responsive Resize ===
-window.addEventListener('resize', () => {
+// === Resize handling ===
+window.addEventListener("resize", () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
