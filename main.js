@@ -1,3 +1,5 @@
+console.log("main.js is connected!");
+``
 // Create the scene
 const scene = new THREE.Scene();
 
