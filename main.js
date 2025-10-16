@@ -5,6 +5,7 @@ const camera = new THREE.PerspectiveCamera(
 );
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setClearColor(0x000000); // black background
 document.body.appendChild(renderer.domElement);
 
 // Step 4: Create a page (plane geometry with texture)
